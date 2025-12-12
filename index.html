@@ -1,0 +1,330 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиски игривых фигур</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="custom-cursor">
+
+    <header id="app-header" class="hidden">
+        <div class="header-container">
+            <div class="banner-ad">
+                ICY COLD SLUSH<br>made with organic jam
+            </div>
+
+            <div class="main-logo">
+                Searches for <span>Playful Figures</span>
+            </div>
+
+            <nav class="top-nav">
+                <ul class="nav-list">
+                    <li><button class="retro-btn home-btn">Home</button></li>
+                    <li class="dropdown">
+                        <button id="levels-dropdown-btn" class="retro-btn dropdown-btn">Уровни</button>
+                        <div id="levels-content"  class="dropdown-content">
+                            <button class="retro-btn level-btn" data-level="1">1 уровень-easy</button>
+                            <button class="retro-btn level-btn" data-level="2">2 уровень-middle</button>
+                            <button class="retro-btn level-btn" data-level="3">3 уровень-hard</button>
+
+                        </div>
+                    </li>
+                    <li><button id="leaderboard-btn" class="retro-btn settings-btn">Рейтинг</button></li>
+                    <li><button id="header-logout-btn" class="retro-btn danger">Сменить игрока</button></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main id="game-container">
+
+        <section id="splash-screen">
+            <h1 class="pixel-title" style="font-size: 3rem; text-shadow: 4px 4px 0 pink;">Searches for<br><span style="font-size: 2rem; color: magenta;">Playful Figures</span></h1>
+            <p class="pixel-press-start">Нажмите, чтобы начать</p>
+        </section>
+
+        <section id="auth-screen" class="hidden screen-center">
+            <div class="retro-window">
+                <div class="window-header">
+                    <span class="window-title">Вход в систему</span>
+                    <button class="window-close">X</button>
+                </div>
+                <div class="window-content">
+                    <label for="username-input" class="pixel-label">Введите ваше имя:</label>
+                    <input type="text" id="username-input" class="retro-input" autocomplete="off" placeholder="Имя игрока...">
+                    <button id="login-btn" class="retro-btn primary">Войти</button>
+                </div>
+            </div>
+        </section>
+
+        <section id="continue-screen" class="hidden screen-center">
+            <div class="retro-window">
+                <div class="window-header">
+                    <span class="window-title">Подтверждение</span>
+                </div>
+                <div class="window-content">
+                    <h2 class="pixel-subtitle">С возвращением, <span id="welcome-name"></span>!</h2>
+                    <p class="pixel-text" style="text-align: center; margin: 10px 0;">Продолжить игру с последнего сохранения?</p>
+                    <div class="btn-group vertical">
+                        <button id="continue-btn" class="retro-btn primary" style="font-size: 1rem; padding: 10px;">Да, продолжить</button>
+                        <button id="restart-btn" class="retro-btn danger">Нет, начать заново</button>
+                        <button id="change-user-btn" class="retro-btn small" style="margin-top: 10px;">Сменить игрока</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="leaderboard-screen" class="hidden screen-center">
+            <div class="retro-window" style="width: 450px;">
+                <div class="window-header">
+                    <span class="window-title">Топ игроков</span>
+                    <button class="window-close id-close-leaderboard">X</button>
+                </div>
+                <div class="window-content">
+                    <p class="pixel-text" style="text-align: center;">Лучшие результаты:</p>
+                    <div class="table-container">
+                        <table class="leaderboard-table">
+                            <thead>
+                                <tr>
+                                    <th>#</th>
+                                    <th>Имя</th>
+                                    <th>Ур.</th>
+                                    <th>Очки</th>
+                                </tr>
+                            </thead>
+                            <tbody id="leaderboard-body"></tbody>
+                        </table>
+                    </div>
+                  
+                </div>
+            </div>
+        </section>
+
+        <section id="main-menu" class="hidden" style="text-align: center; padding: 20px;">
+            <h1 class="items-title">Items</h1>
+            <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+                <div id="start-game-card" class="glossy-box" style="width: 250px; padding: 10px;">
+                    <img src="play.jpg" alt="Game Start" style="width: 100%; border: 2px solid #a0c0e0;">
+                    <p class="pixel-text" style="margin-top: 10px;">Играть (Продолжить)</p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <div id="dolphin-helper" class="hidden">
+        <div class="speech-bubble">
+            <span id="helper-text" class="pixel-text" style="font-family: var(--pixel-font); font-size: 0.7rem; line-height: 1.4;">
+                <b>anemoia</b><br>Чувство ностальгии по времени, в котором ты никогда не жил.
+            </span>
+            <button class="retro-btn tiny-btn" id="close-helper-btn" style="align-self: flex-end;">Ok ty</button>
+        </div>
+        <img src="anemoia.jpg" alt="Дельфин-помощник" class="dolphin-img">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Поиски игривых фигур</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="custom-cursor">-->
+<!-- ВСТАВИТЬ ВМЕСТО СТАРОГО <header> -->
+<!--<header id="app-header" class="hidden">
+    <div class="header-container">
+        <div class="banner-ad">
+            ICY COLD SLUSH<br>made with organic jam
+        </div>
+
+        <div class="main-logo">
+            Searches for <span>Playful Figures</span>
+        </div>
+
+        <nav class="top-nav">
+            <ul class="nav-list">
+                <li><button class="retro-btn home-btn">Home</button></li>
+                <li class="dropdown">
+                    <button class="retro-btn dropdown-btn">Уровни</button>
+                    <div class="dropdown-content">
+                        <button class="retro-btn level-btn" data-level="1">1 уровень-easy</button>
+                        <button class="retro-btn level-btn" data-level="2">2 уровень-middle</button>
+                        <button class="retro-btn level-btn" data-level="3">3 уровень-middle</button>
+                        <button class="retro-btn level-btn" data-level="4">4 уровень-hard</button>
+                        <button class="retro-btn level-btn" data-level="5">5 уровень-hard</button>
+                    </div>
+                </li>-->
+<!-- Новые кнопки -->
+<!--<li><button id="leaderboard-btn" class="retro-btn settings-btn">Рейтинг</button></li>
+                <li><button id="header-logout-btn" class="retro-btn danger">Сменить игрока</button></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+
+<main id="game-container">
+
+    <section id="splash-screen">
+        <h1 class="pixel-title" style="font-size: 3rem; text-shadow: 4px 4px 0 pink;">Searches for<br><span style="font-size: 2rem; color: magenta;">Playful Figures</span></h1>
+        <p class="pixel-press-start">Нажмите, чтобы начать</p>
+    </section>
+
+    <section id="auth-screen" class="hidden screen-center">
+        <div class="retro-window">
+            <div class="window-header">
+                <span class="window-title">Вход в систему</span>
+                <button class="window-close">X</button>
+            </div>
+            <div class="window-content">
+                <label for="username-input" class="pixel-label">Введите ваше имя:</label>
+                <input type="text" id="username-input" class="retro-input" autocomplete="off" placeholder="Имя игрока...">
+                <button id="login-btn" class="retro-btn primary">Войти</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="continue-screen" class="hidden screen-center">
+        <div class="retro-window">
+            <div class="window-header">
+                <span class="window-title">Подтверждение</span>
+            </div>
+            <div class="window-content">
+                <h2 class="pixel-subtitle">С возвращением, <span id="welcome-name"></span>!</h2>
+                <p class="pixel-text" style="text-align: center; margin: 10px 0;">Продолжить игру с последнего сохранения?</p>
+                <div class="btn-group vertical">
+                    <button id="continue-btn" class="retro-btn primary" style="font-size: 1rem; padding: 10px;">Да, продолжить</button>
+                    <button id="restart-btn" class="retro-btn danger">Нет, начать заново</button>
+                    <button id="change-user-btn" class="retro-btn small" style="margin-top: 10px;">Сменить игрока</button>
+                </div>
+            </div>
+        </div>
+    </section>-->
+<!-- ДОБАВИТЬ ВНУТРЬ <main>, НАПРИМЕР ПОСЛЕ <section id="continue-screen"> -->
+<!--<section id="leaderboard-screen" class="hidden screen-center">
+    <div class="retro-window" style="width: 450px;">
+        <div class="window-header">
+            <span class="window-title">Топ игроков</span>
+            <button class="window-close id-close-leaderboard">X</button>
+        </div>
+        <div class="window-content">
+            <p class="pixel-text" style="text-align: center;">Лучшие результаты:</p>-->
+<!-- Таблица рейтинга -->
+<!--<div class="table-container">
+    <table class="leaderboard-table">
+        <thead>
+            <tr>
+                <th>#</th>
+                <th>Имя</th>
+                <th>Ур.</th>
+                <th>Очки</th>
+            </tr>
+        </thead>
+        <tbody id="leaderboard-body">-->
+<!-- Сюда JS будет вставлять игроков -->
+<!--</tbody>
+                </table>
+            </div>
+
+            <button class="retro-btn id-close-leaderboard" style="align-self: center;">Закрыть</button>
+        </div>
+    </div>
+</section>
+
+<section id="main-menu" class="hidden" style="text-align: center; padding: 20px;">
+    <h1 class="items-title">Items</h1>
+    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
+        <div id="start-game-card" class="glossy-box" style="width: 250px; padding: 10px;">
+            <img src="play.jpg" alt="Game Start" style="width: 100%; border: 2px solid #a0c0e0;">
+            <p class="pixel-text" style="margin-top: 10px;">Играть (Продолжить)</p>
+        </div>-->
+<!--<div class="glossy-box" style="width: 250px; padding: 10px;">
+    <img src="play.jpg" alt="Game Boy" style="width: 100%; border: 2px solid #a0c0e0;">
+    <p class="pixel-text" style="margin-top: 10px;">Найти фигуры</p>
+</div>-->
+<!--</div>
+</section>-->
+<!-- НОВАЯ СЕКЦИЯ: ЭКРАН ИГРЫ -->
+<!--<section id="game-screen" class="hidden">-->
+<!-- Добавь вот этот блок сразу после открытия section -->
+<!--<div id="level-message">РАУНД ПРОЙДЕН!</div>-->
+<!-- Верхняя панель (HUD) -->
+<!--<div class="game-hud">
+    <div>Уровень: <span id="level-display">1</span></div>
+    <div class="task-display">ЗАДАНИЕ: <span id="task-text">...</span></div>
+    <div>Время: <span id="time-display">60</span></div>
+    <div>Очки: <span id="score-display">0</span></div>
+    <div>Раунд: <span id="round-display">1</span>/4</div>-->
+ <!-- Добавь счетчик раундов -->
+<!--<button id="exit-level-btn" class="retro-btn danger tiny-btn">Выйти</button>
+</div>-->
+<!-- Поле для фигур -->
+<!--<div id="game-field">-->
+<!-- Сюда JS будет кидать фигуры -->
+<!--</div>
+        </section>
+
+    </main>
+
+    <div id="dolphin-helper" class="hidden">
+        <div class="speech-bubble">
+            <span id="helper-text" class="pixel-text" style="font-family: var(--pixel-font); font-size: 0.7rem; line-height: 1.4;">
+                <b>anemoia</b><br>
+                Чувство ностальгии по времени, в котором ты никогда не жил.
+            </span>
+            <button class="retro-btn tiny-btn" id="close-helper-btn" style="align-self: flex-end;">Ok ty</button>
+        </div>
+        <img src="anemoia.jpg" alt="Дельфин-помощник" class="dolphin-img">
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>-->

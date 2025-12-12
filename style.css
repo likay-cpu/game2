@@ -1,0 +1,665 @@
+﻿
+:root {
+    --bg-color: #f0f8ff; /* светлый фон */
+    --text-color: #000080; /* navy */
+    --glass-border: 2px solid #a0c0e0;
+    --glass-bg: linear-gradient(to bottom, #e6f0ff, #cce0ff,#34e5f6);
+    --glass-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
+    --pixel-font: 'Press Start 2P', cursive;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    font-family: 'Tahoma', 'Verdana', sans-serif; /*стандартные шрифты для Windows 98/XP*/
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+
+
+.custom-cursor {
+    cursor: url('https://i.imgur.com/8Xq5e1b.png'), auto;
+}
+
+a:hover, button:hover, .dropdown-btn:hover {
+    cursor: url('https://i.imgur.com/8Xq5e1b.png'), pointer;
+}
+/*для полного сокрытия*/
+.hidden {
+    display: none !important;
+}
+
+/* для тексов*/
+.pixel-title {
+    font-family: var(--pixel-font);
+    font-size: 1.5rem;
+    color: navy;
+    text-align: center;
+    text-transform: uppercase;
+}
+
+.pixel-subtitle {
+    font-family: var(--pixel-font);
+    font-size: 1rem;
+    color: navy;
+}
+
+.pixel-press-start {
+    font-family: var(--pixel-font);
+    font-size: 0.8rem;
+    animation: blink 1.5s infinite;
+    margin-top: 20px;
+    margin-left:600px;
+}
+
+.pixel-label {
+    font-family: var(--pixel-font);
+    font-size: 0.7rem;
+}
+
+.pixel-text {
+    font-size: 0.9rem;
+}
+
+.items-title {
+    margin-top: 30px;
+    font-style: italic;
+    font-family: serif;
+    font-size: 2.5rem;
+    color: mediumblue;
+    text-align: center;
+    text-shadow: 2px 2px 4px skyblue;
+}
+
+/* ретро стиль */
+.glossy-box, .retro-btn, .window-content {
+    background: var(--glass-bg);
+    border: var(--glass-border);
+    border-radius: 6px;
+    box-shadow: var(--glass-shadow), inset 2px 2px 3px white, inset -2px -2px 3px rgba(0,0,0,0.1);
+}
+
+.retro-btn {
+    padding: 6px 15px;
+    font-family: 'Tahoma', sans-serif;
+    font-weight: bold;
+    font-size: 0.9rem;
+    color: var(--text-color);
+    cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    margin: 2px;
+    text-shadow: 1px 1px 0 white;
+}
+
+    .retro-btn:hover {
+        background: linear-gradient(to bottom, #eef6ff, #d9eaff);
+    }
+
+    .retro-btn:active {
+        box-shadow: inset 3px 3px 5px rgba(0, 0, 0, 0.3), inset -1px -1px 2px white;
+        background: #cce0ff;
+        transform: translateY(2px);
+    }
+
+.primary {
+    background: linear-gradient(to bottom, #b3d1ff, #99c2ff);
+}
+
+.danger {
+    background: linear-gradient(to bottom, #ffcccc, #ff9999);
+    color: #ff006e;
+}
+
+.small, .tiny-btn {
+    padding: 0px 8px;
+    font-size: 0.8rem;
+}
+
+/* окна WINDOWS  */
+/*«полупрозрачный фон» на весь экран с содержимым по центру*/
+.screen-center {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background: rgba(255,255,255,0.6);
+    z-index: 90;
+}
+
+.retro-window {
+    width: 380px;
+    background: #d4d0c8;
+    border: 3px outset #fff;
+    box-shadow: 6px 6px 12px rgba(0,0,0,0.4);
+}
+
+.window-header {
+    background: linear-gradient(to right, navy, #4169e1);
+    color: white;
+    padding: 4px 8px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: bold;
+    font-family: 'Tahoma', sans-serif;
+    font-size: 0.9rem;
+    border-bottom: 1px solid #000;
+}
+
+.window-close {
+    background: #d4d0c8;
+    border: 2px outset #fff;
+    font-weight: bold;
+    line-height: 1;
+    cursor: pointer;
+    padding: 2px 5px;
+    font-size: 0.8rem;
+}
+
+.window-content {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    background: var(--bg-color);
+    border: 2px inset #fff;
+    margin: 5px;
+}
+
+.retro-input {
+    border: 2px inset #d4d0c8;
+    padding: 5px;
+    font-family: 'Tahoma', sans-serif;
+    width: 90%;
+}
+
+.btn-group.vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* шапка */
+#app-header {
+    background: white;
+    border-bottom: 4px double var(--text-color);
+    padding: 15px 0;
+    z-index: 100;
+}
+
+.header-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;/*flex-start;*/
+    padding: 0 30px;
+    max-width: 1200px;
+    margin: 0 auto;
+    
+}
+
+.banner-ad {
+    width: 220px;
+    height: 70px;
+    border: 3px dashed #ff69b4;
+    background: url('polka.jpg'); 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--pixel-font);
+    font-size: 0.7rem;
+    color: magenta;
+    text-align: center;
+    box-shadow: var(--glass-shadow);
+    margin-right: auto;
+    margin-left: 500px;
+}
+
+.main-logo {
+    font-family: serif;
+    font-style: italic;
+    font-size: 3rem;
+    color: navy;
+    text-shadow: 2px 2px 0 pink, 4px 4px 0 var(--text-color);
+    /*position: relative;*/
+    top: 10px;
+    position: absolute;
+    left: 20%;
+    transform: translateX(-50%);
+    white-space: nowrap;/*без переноса на след стрроку*/
+}
+
+    .main-logo span {
+        color: magenta;
+        font-family: cursive;
+    }
+
+/* меню */
+.nav-list {
+    list-style: none; /*убирает стандартные маркеры списка*/
+    padding: 0;
+    margin: 0;
+    display: flex;
+    /*flex-direction:column;*/
+    align-items: flex-start;
+    gap: 8px;
+}
+
+    .nav-list li {
+        position: relative;
+    }
+
+.dropdown-btn {
+    padding-right: 20px;
+}
+
+    /*.dropdown-btn::after {
+        content: '▼';
+        position: absolute;
+        right: 8px;
+        font-size: 0.7rem;
+        top: 50%;
+        transform: translateY(-50%);
+    }
+*/
+.dropdown-content {
+    display: none;
+    position: absolute; /*прямо под кнопкой.*/
+    top: 100%;
+    left: 0;
+    background: white;
+    border: 3px solid var(--text-color);
+    box-shadow: 6px 6px 0 rgba(0,0,0,0.2);
+    z-index: 110;
+    min-width: 120px;
+    flex-direction: column;
+    margin-top: 5px;
+}
+
+   /* .dropdown:hover .dropdown-content, .dropdown-content:hover {
+        display: flex;
+    }*/
+
+    /*.dropdown:hover .dropdown-content, .dropdown-content:active {
+        display: flex;
+    }*/
+    /* Класс для открытия меню через JS */
+    .dropdown-content.show {
+        display: flex; /* Показываем меню */
+    }
+
+/* Чтобы меню не закрывалось само, пока мы в нем */
+.dropdown-content {
+    display: none; /* Скрыто по умолчанию */
+    flex-direction: column;
+    /* Остальные твои стили остаются (position, background и т.д.) */
+}
+
+.level-btn {
+    width: 100%;
+    text-align: left;
+    margin: 0;
+    border-radius: 0;
+    border: none;
+    border-bottom: 2px dotted var(--text-color);
+    background: white;
+    box-shadow: none;
+}
+
+    .level-btn:hover {
+        background: #e6f0ff;
+        box-shadow: none;
+        transform: none;
+    }
+
+    .level-btn:last-child {
+        border-bottom: none;
+    }
+
+/*2008*/
+#dolphin-helper {
+    position: fixed;
+    bottom: 30px;
+    right: 30px;
+    z-index: 120;
+    display: flex;
+    align-items: flex-end;
+    filter: drop-shadow(4px 4px 6px rgba(0,0,0,0.3));
+    /*тень*/
+}
+
+.dolphin-img {
+    width: 100px;
+    height: auto;
+}
+
+.speech-bubble {
+    background: #fff;
+    border: 3px solid navy;
+    border-radius: 20px;
+    padding: 15px;
+    margin-right: -15px;
+    margin-bottom: 50px;
+    position: relative;
+    max-width: 180px;
+    box-shadow: 4px 4px 0 rgba(0,0,0,0.1);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+/*два треугольника*/
+    .speech-bubble::after {
+        content: '';
+        position: absolute;
+        bottom: -15px;
+        right: 30px;
+        border-width: 15px 15px 0 0;
+        border-style: solid;
+        border-color: #fff transparent transparent transparent;
+    }
+
+    .speech-bubble::before {
+        content: '';
+        position: absolute;
+        bottom: -20px;
+        right: 26px;
+        border-width: 18px 18px 0 0;
+        border-style: solid;
+        border-color: navy transparent transparent transparent;
+        z-index: -1;
+    }
+
+@keyframes blink {
+    0%, 100% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+}
+
+
+/* Таблица рейтинга */
+.table-container {
+    background: white;
+    border: 2px inset #d4d0c8;
+    max-height: 200px;
+    overflow-y: auto; /* если игроков много будет прокрутка */
+    padding: 2px;
+}
+
+.leaderboard-table {
+    width: 100%;
+    /* border-collapse: collapse; убирает промежутки между ячейками таблицы*/
+    font-family: 'Tahoma', sans-serif;
+    font-size: 0.85rem;
+}
+/*заголовки*/
+    .leaderboard-table th {
+        background: #d4d0c8;
+        border: 1px solid #808080;
+        padding: 4px;
+        text-align: left;
+        font-weight: bold;
+    }
+    /*ячейки*/
+    .leaderboard-table td {
+        border: 1px dotted #c0c0c0;
+        padding: 4px;
+        color: #000;
+    }
+
+    .leaderboard-table tr:nth-child(even) {
+        background-color: #f0f8ff;
+    }
+
+    /*  лидер */
+    .leaderboard-table tr:first-child td {
+        background-color: #ffffcc;
+        font-weight: bold;
+        color: #b8860b;
+    }
+
+
+/* кнопка игры */
+#start-game-card {
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    #start-game-card:hover {
+        transform: scale(1.05);
+        border-color: magenta !important;
+    }
+
+
+
+
+/* Контейнер всей страницы уровня */
+#game-container-level {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    box-sizing: border-box; /* Чтобы отступы не ломали ширину */
+}
+
+
+.game-hud {
+    width: 98%;
+    max-width: 1200px;
+    background: rgba(255, 255, 255, 0.85); 
+    backdrop-filter: blur(5px); 
+    border: 3px solid navy;
+    border-radius: 12px;
+    padding: 12px 20px;
+    margin-bottom: 15px;
+    display: flex;
+    justify-content: space-between; 
+    align-items: center;
+    gap: 15px;
+    box-shadow: 0 8px 15px rgba(0,0,0,0.3);
+    font-family: var(--pixel-font);
+    font-size: 0.75rem; 
+    color: navy;
+    white-space: nowrap; /* запрещаем перенос строк внутри слов */
+}
+
+
+.task-display {
+    background: #fff;
+    border: 2px dashed #fe0c94;
+    padding: 8px 15px;
+    border-radius: 6px;
+    font-weight: bold;
+    color: #fe0c94;
+    text-align: center;
+    min-width: 300px; 
+    box-shadow: inset 1px 1px 4px rgba(0,0,0,0.1);
+}
+
+
+#game-field {
+    width: 98%;
+    max-width: 1000px; 
+    height: 75vh; 
+    background: white;
+    border: 4px inset #a0c0e0;
+    border-radius: 8px;
+    position: relative;
+    overflow: hidden; /* чтобы фигуры не вылезали */
+    cursor: crosshair;
+    box-shadow: inset 0 0 30px rgba(0,0,0,0.1);
+}
+
+
+.game-figure {
+    position: absolute;
+    cursor: pointer;
+    box-sizing: border-box; 
+}
+
+    .game-figure:active {
+        transform: scale(0.9) !important;
+    }
+
+#level-message {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: rgba(0, 0, 128, 0.95);
+    color: #fff;
+    padding: 40px 60px;
+    border: 6px double #fff;
+    font-family: var(--pixel-font);
+    font-size: 1.8rem;
+    text-align: center;
+    text-shadow: 4px 4px 0 #000;
+    z-index: 500;
+    border-radius: 10px;
+    box-shadow: 0 0 50px rgba(0,0,0,0.5);
+    display: none;
+}
+
+
+/* Зона, куда кидать фигуры */
+/*#drop-zone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 25%;
+    height: 100%;
+    background: rgba(0, 0, 100, 0.05);
+    border-left: 4px dashed navy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: var(--pixel-font);
+    color: navy;
+    font-size: 0.8rem;
+    z-index: 5;
+    box-sizing: border-box;
+    transition: background 0.3s, color 0.3s;
+}*/
+/* Зона, куда кидать фигуры (Справа) */
+#drop-zone {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 20%; /* Тоже 20%, чтобы симметрично */
+    height: 100%;
+    background: rgba(0, 0, 100, 0.05);
+    border-left: 4px dashed navy;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    font-family: var(--pixel-font);
+    color: navy;
+    font-size: 0.8rem;
+    z-index: 5;
+    box-sizing: border-box;
+    transition: background 0.3s, color 0.3s;
+}
+
+    /* Если фигура ПРАВИЛЬНАЯ */
+    #drop-zone.valid-hover {
+        background: rgba(0, 255, 0, 0.2); 
+        border-left-color: lime;
+        color: green;
+        font-weight: bold;
+        font-size: 1rem;
+    }
+
+  
+    #drop-zone.invalid-hover {
+        background: rgba(255, 0, 0, 0.2); 
+        border-left-color: red;
+        color: red;
+        font-weight: bold;
+        font-size: 0.9rem;
+    }
+
+/* Класс для фигуры, которую тащат */
+.dragging {
+    opacity: 0.4;
+}
+
+
+
+@keyframes ghost-blink {
+    0% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+.blinking-figure {
+    animation: ghost-blink 1s infinite; /* 2 секунды цикл */
+}
+
+
+
+#collection-title {
+    width: 100%;
+    font-family: var(--pixel-font);
+    font-size: 0.6rem;
+    text-align: center;
+    color: navy;
+    margin-bottom: 10px;
+    border-bottom: 2px dotted #fe0c94;
+    padding-bottom: 5px;
+}
+
+ Мини-фигурки в коллекции 
+.mini-figure {
+    position: relative !important;  
+    width: 30px !important;
+    height: 30px !important;
+    margin: 2px;
+    border: 1px solid rgba(0,0,0,0.2);
+}
+
+#collected-items {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 20%; 
+    height: 100%;
+    background: rgba(255, 255, 255, 0.5);
+    border-right: 3px solid navy;
+    display: flex;
+    flex-wrap: wrap;
+    align-content: flex-start;
+    justify-content: center; /* Центруем фигурки внутри */
+    padding: 10px;
+    gap: 10px; /* Больше отступ между фигурками */
+    overflow-y: auto;
+    z-index: 5;
+    box-sizing: border-box;
+}
+
+
+

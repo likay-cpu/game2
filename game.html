@@ -1,0 +1,192 @@
+﻿<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уровень 1 - Поиски фигур</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+
+    <style>
+        body {
+            background: radial-gradient(circle, #ff00ce, #cce0ff);
+            background-image: url('bubles.jpg');
+            background-size: cover;
+            background-position: center;
+            overflow: hidden;
+            height: 100vh;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="custom-cursor">
+
+    <div id="game-container-level">
+        <div id="level-message">РАУНД ПРОЙДЕН!</div>
+
+      
+        <div class="game-hud">
+          
+            <div style="min-width: 150px;">
+                Игрок: <span id="player-name-display" style="color:magenta; text-shadow: 1px 1px 0 black;">...</span>
+            </div>
+
+            <div>Раунд: <span id="round-display">1</span>/4</div>
+
+          
+            <div class="task-display">
+                ЗАДАНИЕ:<br><span id="task-text">...</span>
+            </div>
+
+            <div>Время: <span id="time-display" style="color: red;">70</span></div>
+            <div>Очки: <span id="score-display" style="color: navy;">0</span></div>
+        </div>
+
+        
+        <div id="game-field">
+            <!-- Фигуры генерируются тут -->
+        </div>
+
+      
+        <button id="emergency-exit" class="retro-btn danger tiny-btn" style="margin-top:10px;">Вернуться в меню</button>
+    </div>
+
+  
+    <div id="win-modal" class="hidden screen-center" style="background: rgba(0,0,0,0.8); z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center;">
+        <div class="retro-window">
+            <div class="window-header">
+                <span class="window-title">Уровень завершен!</span>
+            </div>
+            <div class="window-content" style="text-align: center;">
+                <h2 class="pixel-subtitle" style="color:green; margin-bottom: 20px;">ПОЗДРАВЛЯЕМ!</h2>
+                <p class="pixel-text">Вы прошли все раунды!</p>
+                <p class="pixel-text">Ваш итоговый счет: <b id="final-score" style="font-size: 1.2rem;">0</b></p>
+                <p class="pixel-text" style="font-size: 0.6rem; color: gray; margin-top: 5px;">(Результат сохранен)</p>
+
+                <div class="btn-group vertical" style="margin-top: 20px;">
+                    <button id="next-level-btn" class="retro-btn primary">Перейти на уровень 2 >></button>
+                    <button id="exit-to-menu-btn" class="retro-btn danger">Выйти в меню</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="game.js"></script>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!--<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Уровень 1 - Поиски фигур</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+<style>
+        body {
+            background: radial-gradient(circle, #ff00ce, #cce0ff);
+            background-image: url('bubles.jpg');
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #game-container-level {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="custom-cursor">
+
+    <div id="game-container-level">
+<div id="level-message" style="display:none; position:absolute; top:50%; left:50%; transform:translate(-50%,-50%); background:navy; color:white; padding:40px; border:4px double white; font-family:'Press Start 2P'; z-index:300;">
+    РАУНД ПРОЙДЕН!
+</div>
+<div class="game-hud">
+    <div>Игрок: <span id="player-name-display" style="color:magenta;">...</span></div>
+    <div>Раунд: <span id="round-display">1</span>/4</div>
+    <div class="task-display">ЗАДАНИЕ: <span id="task-text">...</span></div>
+    <div>Время: <span id="time-display">70</span></div>
+    <div>Очки: <span id="score-display">0</span></div>
+</div>
+<div id="game-field">
+</div>
+<button id="emergency-exit" class="retro-btn danger tiny-btn" style="margin-top:10px;">Вернуться в меню</button>
+</div>
+
+<div id="win-modal" class="hidden screen-center" style="background: rgba(0,0,0,0.7);">
+    <div class="retro-window">
+        <div class="window-header">
+            <span class="window-title">Уровень завершен!</span>
+        </div>
+        <div class="window-content" style="text-align: center;">
+            <h2 class="pixel-subtitle" style="color:green;">ПОЗДРАВЛЯЕМ!</h2>
+            <p class="pixel-text">Вы прошли все раунды!</p>
+            <p class="pixel-text">Ваш итоговый счет: <b id="final-score">0</b></p>
+            <p class="pixel-text" style="font-size: 0.7rem; color: gray;">(Результат сохранен)</p>
+
+            <div class="btn-group vertical" style="margin-top: 15px;">
+                <button id="next-level-btn" class="retro-btn primary">Перейти на уровень 2 >></button>
+                <button id="exit-to-menu-btn" class="retro-btn danger">Выйти в меню</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script src="game.js"></script>
+</body>
+</html>-->
