@@ -52,7 +52,7 @@ a:hover, button:hover, .dropdown-btn:hover {
     font-size: 0.8rem;
     animation: blink 1.5s infinite;
     margin-top: 20px;
-    margin-left:600px;
+    margin-left:650px;
 }
 
 .pixel-label {
@@ -660,6 +660,7 @@ a:hover, button:hover, .dropdown-btn:hover {
     z-index: 5;
     box-sizing: border-box;
 }
+
 
 
 
