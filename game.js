@@ -1,5 +1,5 @@
 ﻿document.addEventListener("DOMContentLoaded", function () {
-    // --- АУДИО СИСТЕМА (Web Audio API) ---
+    
     var audioCtx = new (window.AudioContext || window.webkitAudioContext)();
 
     function playSound(type) {
@@ -14,7 +14,7 @@
         var now = audioCtx.currentTime;
 
         if (type === 'pop') {
-            // Звук "ЧПОК" (успех)
+           
             osc.type = 'sine';
             osc.frequency.setValueAtTime(800, now);
             osc.frequency.exponentialRampToValueAtTime(1200, now + 0.1);
@@ -24,7 +24,7 @@
             osc.stop(now + 0.1);
         }
         else if (type === 'error') {
-            // Звук "БЗЗЗ" (ошибка)
+           
             osc.type = 'sawtooth';
             osc.frequency.setValueAtTime(150, now);
             osc.frequency.linearRampToValueAtTime(100, now + 0.2);
@@ -34,7 +34,7 @@
             osc.stop(now + 0.2);
         }
         else if (type === 'win') {
-            // Звук победы в раунде (ТРА-ТА-ТА)
+           
             osc.type = 'square';
             osc.frequency.setValueAtTime(400, now);
             osc.frequency.setValueAtTime(600, now + 0.1);
@@ -983,4 +983,5 @@
 //nextLevelBtn.addEventListener('click', () => {
 //    alert("Уровень 2 в разработке!");
 //    window.location.href = 'index.html';
+
 //});
