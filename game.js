@@ -163,12 +163,17 @@
 
         // раунды
         if (currentLevel === 1) {
-            if (currentRound === 1 || currentRound === 2) {
+            if (currentRound === 1 ) {
                 currentTaskMode = 'color';
                 targetColorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
                 taskText.textContent = 'НАЙДИ ЦВЕТ: ' + colorNames[targetColorKey];
                 taskText.style.color = gameColors[targetColorKey];
-            } else if (currentRound === 3) {
+            }else if(currentRound===2){
+                currentTaskMode = 'color';
+                targetColorKey = colorKeys[Math.floor(Math.random() * colorKeys.length)];
+                taskText.textContent = 'НАЙДИ ЦВЕТ: ' + colorNames[targetColorKey]+' '+'ЖМИ ДВА РАЗА';
+                taskText.style.color = gameColors[targetColorKey];
+            }else if (currentRound === 3) {
                 currentTaskMode = 'shape';
                 targetShapeKey = shapeKeys[Math.floor(Math.random() * shapeKeys.length)];
                 taskText.textContent = 'НАЙДИ ФОРМУ: ' + shapeNames[targetShapeKey];
@@ -1028,4 +1033,5 @@
 //nextLevelBtn.addEventListener('click', () => {
 //    alert("Уровень 2 в разработке!");
 //    window.location.href = 'index.html';
+
 //});
