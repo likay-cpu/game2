@@ -6,8 +6,29 @@
     <title>Поиски игривых фигур</title>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+
 </head>
 <body class="custom-cursor">
+
+    
+    <div id="gaze-dot" style="position: fixed; width: 20px; height: 20px; background: red; border-radius: 50%; z-index: 99999; pointer-events: none; display: none;"></div>
+
+    
+    <div id="calibration-screen" class="hidden screen-center" style="background: rgba(0,0,50,0.8); z-index: 99998;">
+        <div class="retro-window" style="width: 500px;">
+            <div class="window-header">
+                <span class="window-title">Калибровка айтрекера</span>
+            </div>
+            <div class="window-content">
+                <p class="pixel-text">Пожалуйста, кликните по точке 10 раз. Смотрите прямо на нее перед каждым кликом.</p>
+                <p class="pixel-text" id="calibration-counter">Осталось кликов: 10</p>
+                <div id="calibration-dot" style="width: 30px; height: 30px; background: yellow; border-radius: 50%; position: absolute; top: 50%; left: 50%; cursor: pointer;"></div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <header id="app-header" class="hidden">
         <div class="header-container">
@@ -24,7 +45,7 @@
                     <li><button class="retro-btn home-btn">Home</button></li>
                     <li class="dropdown">
                         <button id="levels-dropdown-btn" class="retro-btn dropdown-btn">Уровни</button>
-                        <div id="levels-content"  class="dropdown-content">
+                        <div id="levels-content" class="dropdown-content">
                             <button class="retro-btn level-btn" data-level="1">1 уровень-easy</button>
                             <button class="retro-btn level-btn" data-level="2">2 уровень-middle</button>
                             <button class="retro-btn level-btn" data-level="3">3 уровень-hard</button>
@@ -45,19 +66,54 @@
             <p class="pixel-press-start">Нажмите, чтобы начать</p>
         </section>
 
+       
+
         <section id="auth-screen" class="hidden screen-center">
-            <div class="retro-window">
+            <div class="retro-window" style="width: 550px;">
                 <div class="window-header">
-                    <span class="window-title">Вход в систему</span>
-                    <button class="window-close">X</button>
+                    <span class="window-title">Регистрация в эксперименте</span>
                 </div>
                 <div class="window-content">
-                    <label for="username-input" class="pixel-label">Введите ваше имя:</label>
-                    <input type="text" id="username-input" class="retro-input" autocomplete="off" placeholder="Имя игрока...">
-                    <button id="login-btn" class="retro-btn primary">Войти</button>
+                    <label for="username-input" class="pixel-label">1. Введите ваш ID участника:</label>
+                    <input type="text" id="username-input" class="retro-input" autocomplete="off" placeholder="Например: 001">
+
+                    <label class="pixel-label" style="margin-top: 10px;">2. Ознакомьтесь с правилами:</label>
+                    <div style="height: 120px; overflow-y: scroll; border: 2px inset #d4d0c8; padding: 10px; background: white; font-family: Tahoma, sans-serif; font-size: 0.85rem;">
+                        <b>Правила эксперимента:</b><br>
+                        Вам предстоит пройти несколько уровней игры, в которых нужно
+                        находить фигуры по заданным правилам.
+                        Во время игры веб-камера будет отслеживать направление вашего
+                        взгляда.<br><br>
+                        <b>Информированное согласие:</b><br>
+                        Нажимая "Согласен", я подтверждаю, что ознакомлен с правилами и даю
+                        добровольное согласие на сбор,
+                        обработку и анонимное использование данных моего взгляда и действий
+                        в исследовательских целях.
+                    </div>
+
+                    <div style="display: flex; align-items: center; gap: 10px; margin-top: 5px;">
+                        <input type="checkbox" id="consent-checkbox" style="width: 18px; height:18px; cursor: pointer;">
+                        <label for="consent-checkbox" class="pixel-label" style="color: navy; cursor:pointer;">Я даю согласие на участие и обработку данных</label>
+                    </div>
+
+                    <label class="pixel-label" style="margin-top: 10px;">3. Вы используете средства коррекции зрения? </label>
+                    <select id="vision-select" class="retro-input" style="cursor: pointer;">
+                        <option value="none">Нет (зрение 1.0)</option>
+                        <option value="glasses">Очки</option>
+                        <option value="lenses">Контактные линзы</option>
+                    </select>
+
+                    <div class="btn-group" style="display: flex; justify-content: space-between;flex-direction: row; margin-top: 15px;">
+                        <button id="decline-btn" class="retro-btn danger" style="flex:1;">ОТКАЗАТЬСЯ</button>
+                        <button id="login-btn" class="retro-btn primary" style="flex: 1;">
+                            НАЧАТЬ(Согласен)
+                        </button>
+                    </div>
                 </div>
             </div>
         </section>
+
+
 
         <section id="continue-screen" class="hidden screen-center">
             <div class="retro-window">
@@ -97,7 +153,7 @@
                             <tbody id="leaderboard-body"></tbody>
                         </table>
                     </div>
-                  
+
                 </div>
             </div>
         </section>
@@ -106,11 +162,96 @@
             <h1 class="items-title">Items</h1>
             <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
                 <div id="start-game-card" class="glossy-box" style="width: 250px; padding: 10px;">
-                    <img src="play.jpg" alt="Game Start" style="width: 100%; border: 2px solid #a0c0e0;">
+                    <img src="picture/play.jpg" alt="Game Start" style="width: 100%; border: 2px solid #a0c0e0;">
                     <p class="pixel-text" style="margin-top: 10px;">Играть (Продолжить)</p>
                 </div>
+
+               
+                <div id="start-calibration-card" class="glossy-box" style="width: 250px; padding: 10px; cursor: pointer;">
+                    <img src="picture/Aure.jpg" alt="Calibrate" style="width: 100%; border: 2px solid #a0c0e0; object-fit: cover; height: 184px;">
+                    <p class="pixel-text" style="margin-top: 10px;">Откалибровать взгляд</p>
+                </div>
+
+
             </div>
         </section>
+
+
+
+        <section id="game-screen" class="hidden">
+            <div id="game-container-level">
+                <div id="level-message">РАУНД ПРОЙДЕН!</div>
+
+
+                <div class="game-hud">
+
+                    <div style="min-width: 150px;">
+                        Игрок: <span id="player-name-display" style="color:magenta; text-shadow: 1px 1px 0 black;">...</span>
+                    </div>
+
+                    <div>Раунд: <span id="round-display">1</span>/4</div>
+
+
+                    <div class="task-display">
+                        ЗАДАНИЕ:<br><span id="task-text">...</span>
+                    </div>
+
+                    <div>Время: <span id="time-display" style="color: red;">70</span></div>
+                    <div>Очки: <span id="score-display" style="color: navy;">0</span></div>
+                </div>
+
+
+                <div id="game-field">
+                   
+                </div>
+
+
+                <button id="emergency-exit" class="retro-btn danger tiny-btn" style="margin-top:10px;">Вернуться в меню</button>
+            </div>
+
+
+            <div id="win-modal" class="hidden screen-center" style="background: rgba(0,0,0,0.8); z-index: 1000; position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none; justify-content: center; align-items: center;">
+                <div class="retro-window">
+                    <div class="window-header">
+                        <span class="window-title">Уровень завершен!</span>
+                    </div>
+                    <div class="window-content" style="text-align: center;">
+                        <h2 class="pixel-subtitle" style="color:green; margin-bottom: 20px;">ПОЗДРАВЛЯЕМ!</h2>
+                        <p class="pixel-text">Вы прошли все раунды!</p>
+                        <p class="pixel-text">Ваш итоговый счет: <b id="final-score" style="font-size: 1.2rem;">0</b></p>
+                        <p class="pixel-text" style="font-size: 0.6rem; color: gray; margin-top: 5px;">(Результат сохранен)</p>
+
+                        <div class="btn-group vertical" style="margin-top: 20px;">
+                            <button id="next-level-btn" class="retro-btn primary">Перейти на уровень 2 >></button>
+                            <button id="exit-to-menu-btn" class="retro-btn danger">Выйти в меню</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+        </section>
+        <!-- ======================================================== -->
+
+
+
+
+
+
+
+
+
+
 
     </main>
 
@@ -121,210 +262,46 @@
             </span>
             <button class="retro-btn tiny-btn" id="close-helper-btn" style="align-self: flex-end;">Ok ty</button>
         </div>
-        <img src="anemoia.jpg" alt="Дельфин-помощник" class="dolphin-img">
+        <img src="picture/anemoia.jpg" alt="Дельфин-помощник" class="dolphin-img">
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/webgazer@2.1.0/dist/webgazer.min.js"></script>
+    <script src="script.js"></script>
+
+
+    <div id="survey-modal" class="hidden screen-center" style="background: rgba(0,0,0,0.8);z-index: 1100; position: fixed; top: 0; left: 0; width: 100%; height: 100%; display: none;justify-content: center; align-items: center;">
+        <div class="retro-window" style="width: 450px;">
+            <div class="window-header">
+                <span class="window-title">Исследование завершено</span>
+            </div>
+            <div class="window-content" style="text-align: center;">
+                <p class="pixel-text">Вы успешно прошли все этапы тренажера!</p>
+                <p class="pixel-text" style="color: navy; margin-top: 10px;">
+                    Для подтверждения гипотезы об обучаемости нам очень важна ваша обратная связь:
+                </p>
+
+                <a href="https://docs.google.com/forms/d/e/1FAIpQLSdVb2BKpGjmw4nmPQy3igfdQspIQxWpCsAC9qP0gwYUOtTzgw/viewform?usp=publish-editor"
+                   target="_blank"
+                   class="retro-btn primary"
+                   style="display: inline-block; text-decoration: none; margin: 20px 0; width: 80%;font-size: 0.8rem; text-align: center;">
+                    ОТКРЫТЬ АНКЕТУ (Google Forms)
+                </a>
+
+                <p class="pixel-text" style="font-size: 0.7rem; color: #555;">
+                    После заполнения анкеты вернитесь в это окно, чтобы сохранить результаты
+                    игры.
+                </p>
+
+                <button id="finish-game-btn" class="retro-btn success" style="width: 100%;margin-top: 15px;">
+                    СОХРАНИТЬ И ВЫЙТИ
+                </button>
+            </div>
+        </div>
     </div>
 
-    <script src="script.js"></script>
+
+
+
+
 </body>
 </html>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-<!--<!DOCTYPE html>
-<html lang="ru">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Поиски игривых фигур</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
-<body class="custom-cursor">-->
-<!-- ВСТАВИТЬ ВМЕСТО СТАРОГО <header> -->
-<!--<header id="app-header" class="hidden">
-    <div class="header-container">
-        <div class="banner-ad">
-            ICY COLD SLUSH<br>made with organic jam
-        </div>
-
-        <div class="main-logo">
-            Searches for <span>Playful Figures</span>
-        </div>
-
-        <nav class="top-nav">
-            <ul class="nav-list">
-                <li><button class="retro-btn home-btn">Home</button></li>
-                <li class="dropdown">
-                    <button class="retro-btn dropdown-btn">Уровни</button>
-                    <div class="dropdown-content">
-                        <button class="retro-btn level-btn" data-level="1">1 уровень-easy</button>
-                        <button class="retro-btn level-btn" data-level="2">2 уровень-middle</button>
-                        <button class="retro-btn level-btn" data-level="3">3 уровень-middle</button>
-                        <button class="retro-btn level-btn" data-level="4">4 уровень-hard</button>
-                        <button class="retro-btn level-btn" data-level="5">5 уровень-hard</button>
-                    </div>
-                </li>-->
-<!-- Новые кнопки -->
-<!--<li><button id="leaderboard-btn" class="retro-btn settings-btn">Рейтинг</button></li>
-                <li><button id="header-logout-btn" class="retro-btn danger">Сменить игрока</button></li>
-            </ul>
-        </nav>
-    </div>
-</header>
-
-
-<main id="game-container">
-
-    <section id="splash-screen">
-        <h1 class="pixel-title" style="font-size: 3rem; text-shadow: 4px 4px 0 pink;">Searches for<br><span style="font-size: 2rem; color: magenta;">Playful Figures</span></h1>
-        <p class="pixel-press-start">Нажмите, чтобы начать</p>
-    </section>
-
-    <section id="auth-screen" class="hidden screen-center">
-        <div class="retro-window">
-            <div class="window-header">
-                <span class="window-title">Вход в систему</span>
-                <button class="window-close">X</button>
-            </div>
-            <div class="window-content">
-                <label for="username-input" class="pixel-label">Введите ваше имя:</label>
-                <input type="text" id="username-input" class="retro-input" autocomplete="off" placeholder="Имя игрока...">
-                <button id="login-btn" class="retro-btn primary">Войти</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="continue-screen" class="hidden screen-center">
-        <div class="retro-window">
-            <div class="window-header">
-                <span class="window-title">Подтверждение</span>
-            </div>
-            <div class="window-content">
-                <h2 class="pixel-subtitle">С возвращением, <span id="welcome-name"></span>!</h2>
-                <p class="pixel-text" style="text-align: center; margin: 10px 0;">Продолжить игру с последнего сохранения?</p>
-                <div class="btn-group vertical">
-                    <button id="continue-btn" class="retro-btn primary" style="font-size: 1rem; padding: 10px;">Да, продолжить</button>
-                    <button id="restart-btn" class="retro-btn danger">Нет, начать заново</button>
-                    <button id="change-user-btn" class="retro-btn small" style="margin-top: 10px;">Сменить игрока</button>
-                </div>
-            </div>
-        </div>
-    </section>-->
-<!-- ДОБАВИТЬ ВНУТРЬ <main>, НАПРИМЕР ПОСЛЕ <section id="continue-screen"> -->
-<!--<section id="leaderboard-screen" class="hidden screen-center">
-    <div class="retro-window" style="width: 450px;">
-        <div class="window-header">
-            <span class="window-title">Топ игроков</span>
-            <button class="window-close id-close-leaderboard">X</button>
-        </div>
-        <div class="window-content">
-            <p class="pixel-text" style="text-align: center;">Лучшие результаты:</p>-->
-<!-- Таблица рейтинга -->
-<!--<div class="table-container">
-    <table class="leaderboard-table">
-        <thead>
-            <tr>
-                <th>#</th>
-                <th>Имя</th>
-                <th>Ур.</th>
-                <th>Очки</th>
-            </tr>
-        </thead>
-        <tbody id="leaderboard-body">-->
-<!-- Сюда JS будет вставлять игроков -->
-<!--</tbody>
-                </table>
-            </div>
-
-            <button class="retro-btn id-close-leaderboard" style="align-self: center;">Закрыть</button>
-        </div>
-    </div>
-</section>
-
-<section id="main-menu" class="hidden" style="text-align: center; padding: 20px;">
-    <h1 class="items-title">Items</h1>
-    <div style="display: flex; justify-content: center; gap: 20px; flex-wrap: wrap; margin-top: 30px;">
-        <div id="start-game-card" class="glossy-box" style="width: 250px; padding: 10px;">
-            <img src="play.jpg" alt="Game Start" style="width: 100%; border: 2px solid #a0c0e0;">
-            <p class="pixel-text" style="margin-top: 10px;">Играть (Продолжить)</p>
-        </div>-->
-<!--<div class="glossy-box" style="width: 250px; padding: 10px;">
-    <img src="play.jpg" alt="Game Boy" style="width: 100%; border: 2px solid #a0c0e0;">
-    <p class="pixel-text" style="margin-top: 10px;">Найти фигуры</p>
-</div>-->
-<!--</div>
-</section>-->
-<!-- НОВАЯ СЕКЦИЯ: ЭКРАН ИГРЫ -->
-<!--<section id="game-screen" class="hidden">-->
-<!-- Добавь вот этот блок сразу после открытия section -->
-<!--<div id="level-message">РАУНД ПРОЙДЕН!</div>-->
-<!-- Верхняя панель (HUD) -->
-<!--<div class="game-hud">
-    <div>Уровень: <span id="level-display">1</span></div>
-    <div class="task-display">ЗАДАНИЕ: <span id="task-text">...</span></div>
-    <div>Время: <span id="time-display">60</span></div>
-    <div>Очки: <span id="score-display">0</span></div>
-    <div>Раунд: <span id="round-display">1</span>/4</div>-->
- <!-- Добавь счетчик раундов -->
-<!--<button id="exit-level-btn" class="retro-btn danger tiny-btn">Выйти</button>
-</div>-->
-<!-- Поле для фигур -->
-<!--<div id="game-field">-->
-<!-- Сюда JS будет кидать фигуры -->
-<!--</div>
-        </section>
-
-    </main>
-
-    <div id="dolphin-helper" class="hidden">
-        <div class="speech-bubble">
-            <span id="helper-text" class="pixel-text" style="font-family: var(--pixel-font); font-size: 0.7rem; line-height: 1.4;">
-                <b>anemoia</b><br>
-                Чувство ностальгии по времени, в котором ты никогда не жил.
-            </span>
-            <button class="retro-btn tiny-btn" id="close-helper-btn" style="align-self: flex-end;">Ok ty</button>
-        </div>
-        <img src="anemoia.jpg" alt="Дельфин-помощник" class="dolphin-img">
-    </div>
-
-    <script src="script.js"></script>
-</body>
-</html>-->
