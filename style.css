@@ -1,7 +1,7 @@
 ﻿
 :root {
     --bg-color: #f0f8ff; /* светлый фон */
-    --text-color: #000080; /* navy */
+    --text-color: #000080; 
     --glass-border: 2px solid #a0c0e0;
     --glass-bg: linear-gradient(to bottom, #e6f0ff, #cce0ff,#34e5f6);
     --glass-shadow: 3px 3px 5px rgba(0, 0, 0, 0.2);
